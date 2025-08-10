@@ -1,0 +1,13 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Permite la lectura pública de la colección 'cards' para desarrollo.
+    // ADVERTENCIA: Esto hace que tus tarjetas sean legibles por cualquiera.
+    // Deberás asegurar estas reglas antes de pasar a producción.
+    match /cards/{cardId} {
+      allow read: if true;
+      allow write: if false; // Por ahora, no permitir la escritura desde el cliente.
+    }
+  }
+}
